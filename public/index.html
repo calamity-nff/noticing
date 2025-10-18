@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOTICING</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+      background: white;
+      color: black;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-align: center;
+      margin: 40px 0 10px 0;
+      color: #a67c52;
+    }
+    
+    .email {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #b8906a;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .email a {
+      color: #b8906a;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .email a:hover {
+      color: #a67c52;
+    }
+    
+    .form-section {
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: #666;
+    }
+    
+    ::placeholder {
+      color: #b0b0b0;
+    }
+    
+    button {
+      background: #a67c52;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    
+    button:hover {
+      background: #8b6644;
+    }
+    
+    button:active {
+      background: #6f4f35;
+    }
+    
+    .comments-section {
+      margin-top: 40px;
+    }
+    
+    .comment-item {
+      border-bottom: 1px solid #f0f0f0;
+      padding: 24px 0;
+    }
+    
+    .comment-item:last-child {
+      border-bottom: none;
+    }
+    
+    .comment-text {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .comment-meta {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 32px;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+    }
+    
+    .modal-content p {
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+    
+    .char-count {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 4px;
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+        margin: 20px 0 10px 0;
+      }
+      
+      .email {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+      }
+      
+      body {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NOTICING</h1>
+    <div class="email">
+      <a href="mailto:hello@noticing.org">hello@noticing.org</a>
+    </div>
+    
+    <div class="form-section">
+      <form id="commentForm">
+        <div class="form-group">
+          <label for="comment">Comment / Comentario</label>
+          <textarea 
+            id="comment" 
+            name="comment" 
+            maxlength="500" 
+            placeholder="write anything / escribe cualquier cosa"
+          ></textarea>
+          <div class="char-count"><span id="charCount">0</span>/500</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="name">Name / Nombre</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            maxlength="50" 
+            placeholder="anonymous / anónimo"
+          >
+        </div>
+        
+        <button type="submit">Submit / Enviar</button>
+      </form>
+    </div>
+    
+    <div class="comments-section" id="commentsSection">
+      <!-- Comments will be loaded here -->
+    </div>
+  </div>
+  
+  <div class="modal" id="errorModal">
+    <div class="modal-content">
+      <p id="errorMessage">write something to submit a comment / escribe algo para enviar un comentario</p>
+      <button onclick="closeModal()">ok</button>
+    </div>
+  </div>
+  
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <p>comment submitted, thanks for noticing / comentario enviado, gracias por noticing</p>
+      <button onclick="closeSuccessModal()">ok</button>
+    </div>
+  </div>
+  
+  <script>
+    const commentTextarea = document.getElementById('comment');
+    const charCount = document.getElementById('charCount');
+    const form = document.getElementById('commentForm');
+    const modal = document.getElementById('errorModal');
+    const successModal = document.getElementById('successModal');
+    const commentsSection = document.getElementById('commentsSection');
+    
+    // Character counter
+    commentTextarea.addEventListener('input', () => {
+      charCount.textContent = commentTextarea.value.length;
+    });
+    
+    // Load comments
+    async function loadComments() {
+      try {
+        const response = await fetch('/api/comments');
+        const comments = await response.json();
+        
+        if (comments.length === 0) {
+          commentsSection.innerHTML = '<p style="text-align: center; color: #999;">No comments yet. Be the first to notice something!</p>';
+          return;
+        }
+        
+        commentsSection.innerHTML = comments.map(comment => `
+          <div class="comment-item">
+            <div class="comment-text">${escapeHtml(comment.comment)}</div>
+            <div class="comment-meta">
+              ${escapeHtml(comment.name)} · ${comment.timestamp}
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Failed to load comments:', error);
+      }
+    }
+    
+    // Submit form
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const comment = commentTextarea.value;
+      const name = document.getElementById('name').value;
+      
+      try {
+        const response = await fetch('/api/comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ comment, name })
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+          showModal(result.error || 'write something to submit a comment / escribe algo para enviar un comentario');
+          return;
+        }
+        
+        // Clear form and reload comments
+        form.reset();
+        charCount.textContent = '0';
+        loadComments();
+        showSuccessModal();
+      } catch (error) {
+        console.error('Failed to submit comment:', error);
+        showModal('Something went wrong. Please try again.');
+      }
+    });
+    
+    function showModal(message) {
+      document.getElementById('errorMessage').textContent = message;
+      modal.classList.add('active');
+    }
+    
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+    
+    function showSuccessModal() {
+      successModal.classList.add('active');
+    }
+    
+    function closeSuccessModal() {
+      successModal.classList.remove('active');
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    successModal.addEventListener('click', (e) => {
+      if (e.target === successModal) closeSuccessModal();
+    });
+    
+    // Load comments on page load
+    loadComments();
+  </script>
+</body>
+</html>

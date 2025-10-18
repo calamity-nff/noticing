@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOTICING - Admin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+      background: white;
+      color: black;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin: 40px 0;
+    }
+    
+    .login-form {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 40px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    
+    .login-form h2 {
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    
+    button {
+      background: #a67c52;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    
+    button:hover {
+      background: #8b6644;
+    }
+    
+    button.delete {
+      background: #cc0000;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    
+    button.delete:hover {
+      background: #aa0000;
+    }
+    
+    .admin-panel {
+      display: none;
+    }
+    
+    .admin-panel.active {
+      display: block;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .comment-item {
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .comment-content {
+      flex: 1;
+      margin-right: 20px;
+    }
+    
+    .comment-text {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .comment-meta {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .comment-id {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 4px;
+    }
+    
+    .error {
+      color: #cc0000;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .empty-state {
+      text-align: center;
+      color: #999;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-form" id="loginForm">
+      <h2>Admin Login</h2>
+      <form id="loginFormElement">
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Enter admin password"
+          required
+        >
+        <button type="submit">Login</button>
+        <div class="error" id="loginError"></div>
+      </form>
+    </div>
+    
+    <div class="admin-panel" id="adminPanel">
+      <div class="header">
+        <h1>NOTICING - Admin Panel</h1>
+        <button onclick="logout()">Logout</button>
+      </div>
+      
+      <div id="commentsContainer">
+        <!-- Comments will be loaded here -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginFormElement = document.getElementById('loginFormElement');
+    const adminPanel = document.getElementById('adminPanel');
+    const loginError = document.getElementById('loginError');
+    const commentsContainer = document.getElementById('commentsContainer');
+    
+    // Check if already logged in
+    checkAuth();
+    
+    async function checkAuth() {
+      try {
+        const response = await fetch('/api/admin/check');
+        const data = await response.json();
+        if (data.isAdmin) {
+          showAdminPanel();
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+      }
+    }
+    
+    loginFormElement.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+        
+        if (response.ok) {
+          loginError.textContent = '';
+          showAdminPanel();
+        } else {
+          loginError.textContent = 'Invalid password';
+        }
+      } catch (error) {
+        loginError.textContent = 'Login failed';
+      }
+    });
+    
+    async function showAdminPanel() {
+      loginForm.style.display = 'none';
+      adminPanel.classList.add('active');
+      loadComments();
+    }
+    
+    async function loadComments() {
+      try {
+        const response = await fetch('/api/comments');
+        const comments = await response.json();
+        
+        if (comments.length === 0) {
+          commentsContainer.innerHTML = '<div class="empty-state">No comments yet</div>';
+          return;
+        }
+        
+        commentsContainer.innerHTML = comments.map(comment => `
+          <div class="comment-item" id="comment-${comment.id}">
+            <div class="comment-content">
+              <div class="comment-text">${escapeHtml(comment.comment)}</div>
+              <div class="comment-meta">
+                ${escapeHtml(comment.name)} · ${comment.timestamp}
+              </div>
+              <div class="comment-id">ID: ${comment.id}</div>
+            </div>
+            <button class="delete" onclick="deleteComment(${comment.id})">Delete</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Failed to load comments:', error);
+        commentsContainer.innerHTML = '<div class="error">Failed to load comments</div>';
+      }
+    }
+    
+    async function deleteComment(id) {
+      if (!confirm('Are you sure you want to delete this comment?')) {
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/admin/comments/${id}`, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          document.getElementById(`comment-${id}`).remove();
+          
+          // Check if no comments left
+          if (commentsContainer.children.length === 0) {
+            commentsContainer.innerHTML = '<div class="empty-state">No comments yet</div>';
+          }
+        } else {
+          alert('Failed to delete comment');
+        }
+      } catch (error) {
+        alert('Failed to delete comment');
+      }
+    }
+    
+    async function logout() {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST' });
+        window.location.reload();
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
