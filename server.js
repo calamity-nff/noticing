@@ -9,11 +9,22 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || '$2b$10$example';
 
+const Redis = require('redis');
+const RedisStore = require('connect-redis').default;
+
+// Create Redis client
+const redisClient = Redis.createClient({
+  url: process.env.REDIS_URL
+});
+
+redisClient.connect().catch(console.error);
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(session({
+  store: new RedisStore({ client: redisClient }),
   secret: process.env.SESSION_SECRET || 'change-this-secret',
   resave: false,
   saveUninitialized: false,
@@ -21,7 +32,7 @@ app.use(session({
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
     sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
