@@ -119,6 +119,9 @@ app.post('/api/admin/logout', (req, res) => {
 });
 
 app.delete('/api/admin/comments/:id', (req, res) => {
+  console.log('Delete request - Session:', req.session);
+  console.log('Is admin?', req.session.isAdmin);
+  
   if (!req.session.isAdmin) {
     return res.status(403).json({ error: 'Unauthorized' });
   }
