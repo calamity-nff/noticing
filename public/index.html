@@ -27,6 +27,36 @@
       width: 100%;
     }
 
+    .player {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
+    .play-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ccc;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+
+    .play-btn:hover {
+      color: #999;
+    }
+
+    .play-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
     .hero {
       width: 100%;
       max-width: 640px;
@@ -86,6 +116,14 @@
   </style>
 </head>
 <body>
+  <div class="player">
+    <audio id="audio" loop src="/Immensita.mp3"></audio>
+    <button class="play-btn" id="playBtn" onclick="togglePlay()">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <span id="playLabel">play</span>
+    </button>
+  </div>
+
   <div class="container">
     <div class="hero">
       <img src="/amw_copy.jpeg" alt="Noticing">
@@ -98,5 +136,22 @@
       <span class="w4">Radiance</span>
     </div>
   </div>
+  <script>
+    const audio = document.getElementById('audio');
+    const playIcon = document.getElementById('playIcon');
+    const playLabel = document.getElementById('playLabel');
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        playLabel.textContent = 'pause';
+      } else {
+        audio.pause();
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        playLabel.textContent = 'play';
+      }
+    }
+  </script>
 </body>
 </html>
