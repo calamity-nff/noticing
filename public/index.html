@@ -27,6 +27,45 @@
       width: 100%;
     }
 
+    .words {
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .words span {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: block;
+    }
+
+    .w1 { color: #333; }
+    .w2 { color: #666; }
+    .w3 { color: #999; }
+    .w4 { color: #ccc; }
+
+    .hero {
+      width: 100%;
+      max-width: 640px;
+      margin-bottom: 60px;
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    p {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 2.2;
+      letter-spacing: 0.03em;
+      color: black;
+    }
+
     .player {
       position: fixed;
       top: 20px;
@@ -57,60 +96,9 @@
       fill: currentColor;
     }
 
-    .hero {
-      width: 100%;
-      max-width: 640px;
-      margin-top: 0;
-      margin-bottom: 40px;
-    }
-
-    .hero img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    p {
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 2.2;
-      letter-spacing: 0.03em;
-      color: black;
-    }
-
-    .words {
-      margin-top: 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .words span {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      display: block;
-    }
-
-    .w1 { color: #333; }
-    .w2 { color: #666; }
-    .w3 { color: #999; }
-    .w4 { color: #ccc; }
-
     @media (max-width: 600px) {
       body {
-        padding: 60px 30px;
-        align-items: flex-start;
-        padding-top: 80px;
-      }
-
-      h1 {
-        margin-bottom: 40px;
-      }
-
-      p {
-        font-size: 1rem;
-        line-height: 2;
+        padding: 20px 25px;
       }
     }
   </style>
@@ -135,13 +123,8 @@
       <img src="/amw_copy.jpeg" alt="Noticing">
     </div>
     <p>Noticing is a new center for arts, culture, and education based in the Mission in San Francisco. Our first experimental programs will take place later this year. We will open publicly in 2027.</p>
-    <div class="words">
-      <span class="w1">Time</span>
-      <span class="w2">Memory</span>
-      <span class="w3">Prophecy</span>
-      <span class="w4">Radiance</span>
-    </div>
   </div>
+
   <script>
     const audio = document.getElementById('audio');
     const playIcon = document.getElementById('playIcon');
