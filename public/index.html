@@ -19,7 +19,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 80px 40px 40px 40px;
+      padding: 40px;
     }
 
     .container {
@@ -57,25 +57,10 @@
       fill: currentColor;
     }
 
-    p {
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 2.2;
-      letter-spacing: 0.03em;
-      color: black;
-      margin-bottom: 20px;
-    }
-
-    .w1 { color: #333; }
-    .w2 { color: #666; }
-    .w3 { color: #999; }
-    .w4 { color: #ccc; }
-
     .hero {
       width: 100%;
       max-width: 640px;
-      margin-top: 20px;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
     .hero img {
@@ -84,11 +69,36 @@
       display: block;
     }
 
+    p {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 2.2;
+      letter-spacing: 0.03em;
+      color: black;
+    }
+
+    .words {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .words span {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: block;
+    }
+
+    .w1 { color: #333; }
+    .w2 { color: #666; }
+    .w3 { color: #999; }
+    .w4 { color: #ccc; }
+
     @media (max-width: 600px) {
       body {
-        padding: 40px 25px;
-        min-height: unset;
-        align-items: flex-start;
+        padding: 20px 25px;
       }
     }
   </style>
@@ -103,9 +113,15 @@
   </div>
 
   <div class="container">
-    <p>Noticing is a new center for arts, culture, and education based in the Mission in San Francisco. Its first programs will take place in late 2026. It will open to the public in 2027.<br><br><span class="w1">Time</span><br><span class="w2">Memory</span><br><span class="w3">Prophecy</span><br><span class="w4">Radiance</span></p>
     <div class="hero">
       <img src="/amw_copy.jpeg" alt="Noticing">
+    </div>
+    <p>Noticing is a new center for arts, culture, and education based in the Mission in San Francisco. Its first programs will take place in late 2026. It will open to the public in 2027.</p>
+    <div class="words">
+      <span class="w1">Time</span>
+      <span class="w2">Memory</span>
+      <span class="w3">Prophecy</span>
+      <span class="w4">Radiance</span>
     </div>
   </div>
 
