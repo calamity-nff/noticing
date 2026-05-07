@@ -146,12 +146,19 @@ app.post('/api/subscribe', (req, res) => {
 
     // Send notification email (non-blocking)
     if (process.env.SMTP_HOST) {
+      console.log('Attempting to send email notification for:', finalEmail);
       transporter.sendMail({
         from: process.env.SMTP_USER,
         to: 'calvin@noticing.org',
         subject: 'New signup: ' + finalEmail,
         text: finalEmail + ' signed up to stay updated on noticing.org.'
-      }).catch(err => console.error('Email send error:', err));
+      }).then(() => {
+        console.log('Email notification sent successfully');
+      }).catch(err => {
+        console.error('Email send error:', err.message);
+      });
+    } else {
+      console.log('SMTP_HOST not set, skipping email notification');
     }
 
     res.json({ success: true });
