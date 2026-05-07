@@ -77,24 +77,55 @@
       color: black;
     }
 
-    .words {
+    .signup {
       margin-top: 40px;
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      gap: 10px;
+      align-items: center;
     }
 
-    .words span {
-      font-size: 1.05rem;
-      font-weight: 700;
+    .signup input[type="email"] {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.9rem;
       letter-spacing: 0.03em;
-      display: block;
+      color: black;
+      background: transparent;
     }
 
-    .w1 { color: #333; }
-    .w2 { color: #666; }
-    .w3 { color: #999; }
-    .w4 { color: #ccc; }
+    .signup input[type="email"]::placeholder {
+      color: #ccc;
+    }
+
+    .signup button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #ccc;
+      white-space: nowrap;
+    }
+
+    .signup button:hover {
+      color: #999;
+    }
+
+    .signup-success {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #999;
+      display: none;
+    }
 
     @media (max-width: 600px) {
       body {
@@ -116,13 +147,12 @@
     <div class="hero">
       <img src="/AMW_25_007.jpg" alt="Noticing">
     </div>
-    <p>Noticing is an emerging center for art, philosophy, and spirituality based in the Mission in San Francisco. It is concerned with attunement to the experience of being alive. In its approach it is patient, sincere, courageous, optimistic, and warm. Its first programs will take place in 2026, and it will open to the public in 2027.</p>
-    <div class="words">
-      <span class="w1">Time</span>
-      <span class="w2">Memory</span>
-      <span class="w3">Prophecy</span>
-      <span class="w4">Radiance</span>
+    <p>Noticing is a new nonprofit cultural center in the Mission District of San Francisco that brings together art, philosophy, and practice to explore paths toward personal and collective transformation.</p>
+    <div class="signup" id="signupForm">
+      <input type="email" id="emailInput" placeholder="your email" />
+      <button onclick="subscribe()">stay updated</button>
     </div>
+    <div class="signup-success" id="signupSuccess">we'll be in touch</div>
   </div>
 
   <script>
@@ -141,6 +171,30 @@
         playLabel.textContent = 'play';
       }
     }
+
+    async function subscribe() {
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email) return;
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        if (res.ok) {
+          document.getElementById('signupForm').style.display = 'none';
+          document.getElementById('signupSuccess').style.display = 'block';
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    document.getElementById('emailInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') subscribe();
+    });
   </script>
 </body>
 </html>

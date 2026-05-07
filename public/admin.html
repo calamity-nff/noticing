@@ -141,6 +141,37 @@
       color: #999;
       margin-top: 60px;
     }
+
+    .section-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin: 48px 0 20px;
+      padding-top: 40px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .email-item {
+      border: 1px solid #e0e0e0;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .email-address {
+      font-size: 1rem;
+    }
+
+    .email-meta {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -165,9 +196,11 @@
         <button onclick="logout()">Logout</button>
       </div>
       
-      <div id="commentsContainer">
-        <!-- Comments will be loaded here -->
-      </div>
+      <div class="section-heading">Email Signups</div>
+      <div id="emailsContainer"></div>
+
+      <div class="section-heading">Comments</div>
+      <div id="commentsContainer"></div>
     </div>
   </div>
   
@@ -218,7 +251,52 @@
     async function showAdminPanel() {
       loginForm.style.display = 'none';
       adminPanel.classList.add('active');
+      loadEmails();
       loadComments();
+    }
+
+    async function loadEmails() {
+      const emailsContainer = document.getElementById('emailsContainer');
+      try {
+        const response = await fetch('/api/admin/emails');
+        const emails = await response.json();
+
+        if (emails.length === 0) {
+          emailsContainer.innerHTML = '<div class="empty-state">No signups yet</div>';
+          return;
+        }
+
+        emailsContainer.innerHTML = emails.map(e => `
+          <div class="email-item" id="email-${e.id}">
+            <div>
+              <div class="email-address">${escapeHtml(e.email)}</div>
+              <div class="email-meta">${e.timestamp}</div>
+            </div>
+            <button class="delete" onclick="deleteEmail(${e.id})">Delete</button>
+          </div>
+        `).join('');
+      } catch (error) {
+        emailsContainer.innerHTML = '<div class="error">Failed to load emails</div>';
+      }
+    }
+
+    async function deleteEmail(id) {
+      if (!confirm('Remove this email?')) return;
+
+      try {
+        const response = await fetch(`/api/admin/emails/${id}`, { method: 'DELETE' });
+        if (response.ok) {
+          document.getElementById(`email-${id}`).remove();
+          const emailsContainer = document.getElementById('emailsContainer');
+          if (emailsContainer.children.length === 0) {
+            emailsContainer.innerHTML = '<div class="empty-state">No signups yet</div>';
+          }
+        } else {
+          alert('Failed to delete email');
+        }
+      } catch (error) {
+        alert('Failed to delete email');
+      }
     }
     
     async function loadComments() {

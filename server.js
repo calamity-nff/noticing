@@ -4,6 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,23 @@ db.run(`CREATE TABLE IF NOT EXISTS comments (
   name TEXT NOT NULL,
   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
+
+db.run(`CREATE TABLE IF NOT EXISTS emails (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL UNIQUE,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
+
+// Email transporter (configure via env vars: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS)
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT) || 587,
+  secure: false,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
+  }
+});
 
 // Helper function to convert UTC to PST
 function toPST(utcDate) {
@@ -107,6 +125,39 @@ app.get('/api/comments', (req, res) => {
   });
 });
 
+// Subscribe endpoint
+app.post('/api/subscribe', (req, res) => {
+  const { email } = req.body;
+
+  if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
+
+  const finalEmail = email.trim().toLowerCase();
+
+  db.run('INSERT INTO emails (email) VALUES (?)', [finalEmail], function(err) {
+    if (err) {
+      if (err.message.includes('UNIQUE constraint failed')) {
+        return res.json({ success: true }); // already signed up, still show success
+      }
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to save email' });
+    }
+
+    // Send notification email (non-blocking)
+    if (process.env.SMTP_HOST) {
+      transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: 'calvin@noticing.org',
+        subject: 'New signup: ' + finalEmail,
+        text: finalEmail + ' signed up to stay updated on noticing.org.'
+      }).catch(err => console.error('Email send error:', err));
+    }
+
+    res.json({ success: true });
+  });
+});
+
 // Admin Routes
 app.post('/api/admin/login', async (req, res) => {
   const { password } = req.body;
@@ -155,6 +206,39 @@ app.delete('/api/admin/comments/:id', (req, res) => {
 
 app.get('/api/admin/check', (req, res) => {
   res.json({ isAdmin: !!req.session.isAdmin });
+});
+
+app.get('/api/admin/emails', (req, res) => {
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+
+  db.all('SELECT * FROM emails ORDER BY timestamp DESC', [], (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to fetch emails' });
+    }
+
+    res.json(rows.map(row => ({
+      id: row.id,
+      email: row.email,
+      timestamp: toPST(row.timestamp)
+    })));
+  });
+});
+
+app.delete('/api/admin/emails/:id', (req, res) => {
+  if (!req.session.isAdmin) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+
+  db.run('DELETE FROM emails WHERE id = ?', [req.params.id], (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to delete email' });
+    }
+    res.json({ success: true });
+  });
 });
 
 // Serve HTML pages
