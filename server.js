@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -57,17 +57,6 @@ db.run(`CREATE TABLE IF NOT EXISTS emails (
   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
-// Email transporter (configure via env vars: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS)
-const smtpPort = parseInt(process.env.SMTP_PORT) || 465;
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: smtpPort,
-  secure: smtpPort === 465,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
 
 // Helper function to convert UTC to PST
 function toPST(utcDate) {
@@ -146,10 +135,11 @@ app.post('/api/subscribe', (req, res) => {
     }
 
     // Send notification email (non-blocking)
-    if (process.env.SMTP_HOST) {
+    if (process.env.RESEND_API_KEY) {
       console.log('Attempting to send email notification for:', finalEmail);
-      transporter.sendMail({
-        from: process.env.SMTP_USER,
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      resend.emails.send({
+        from: 'Noticing <onboarding@resend.dev>',
         to: 'calvin@noticing.org',
         subject: 'New signup: ' + finalEmail,
         text: finalEmail + ' signed up to stay updated on noticing.org.'
@@ -159,7 +149,7 @@ app.post('/api/subscribe', (req, res) => {
         console.error('Email send error:', err.message);
       });
     } else {
-      console.log('SMTP_HOST not set, skipping email notification');
+      console.log('RESEND_API_KEY not set, skipping email notification');
     }
 
     res.json({ success: true });
