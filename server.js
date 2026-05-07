@@ -139,7 +139,7 @@ app.post('/api/subscribe', (req, res) => {
       console.log('Attempting to send email notification for:', finalEmail);
       const resend = new Resend(process.env.RESEND_API_KEY);
       resend.emails.send({
-        from: 'Noticing <onboarding@resend.dev>',
+        from: 'Noticing <noreply@noticing.org>',
         to: 'calvin@noticing.org',
         subject: 'New signup: ' + finalEmail,
         text: finalEmail + ' signed up to stay updated on noticing.org.'
