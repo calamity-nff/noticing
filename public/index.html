@@ -58,6 +58,7 @@
     }
 
     .hero {
+      position: relative;
       width: 100%;
       max-width: 640px;
       margin-bottom: 40px;
@@ -67,6 +68,25 @@
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 16px 14px 16px;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.55));
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #e8e4df;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .hero:hover .hero-caption {
+      opacity: 1;
     }
 
     p {
@@ -146,6 +166,7 @@
   <div class="container">
     <div class="hero">
       <img src="/celaya holy war of patience.jpeg" alt="Noticing">
+      <div class="hero-caption">The Holy War of Patience, Enrique Martinez Celaya</div>
     </div>
     <p>Noticing is a new nonprofit cultural center in the Mission District of San Francisco that brings together art, philosophy, and practice to explore paths toward personal and collective transformation.</p>
     <div class="signup" id="signupForm">
