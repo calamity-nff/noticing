@@ -38,7 +38,7 @@ app.use(session({
 }));
 
 // Initialize SQLite Database
-const db = new sqlite3.Database('./noticing.db', (err) => {
+const db = new sqlite3.Database(process.env.DATABASE_PATH || './noticing.db', (err) => {
   if (err) console.error('Database error:', err);
   else console.log('Connected to SQLite database');
 });
