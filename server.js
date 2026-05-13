@@ -20,6 +20,14 @@ const redisClient = Redis.createClient({
 
 redisClient.connect().catch(console.error);
 
+// Redirect bare domain to www
+app.use((req, res, next) => {
+  if (req.hostname === 'noticing.org') {
+    return res.redirect(301, 'https://www.noticing.org' + req.originalUrl);
+  }
+  next();
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
