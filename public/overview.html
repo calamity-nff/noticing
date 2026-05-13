@@ -25,7 +25,7 @@
       padding: 28px 40px;
       border-bottom: 1px solid #ddd;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
     }
 
@@ -41,11 +41,39 @@
 
     .site-header a.wordmark:hover { color: #555; }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .site-nav {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       color: #999;
+    }
+
+    .play-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #bbb;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .play-btn:hover { color: #888; }
+
+    .play-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
     /* ——— Page container ——— */
@@ -188,7 +216,14 @@
 
   <header class="site-header">
     <a class="wordmark" href="/">Noticing</a>
-    <span class="site-nav">Overview</span>
+    <div class="header-right">
+      <span class="site-nav">Overview</span>
+      <audio id="audio" loop src="/mama.mp3"></audio>
+      <button class="play-btn" id="playBtn" onclick="togglePlay()">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <span id="playLabel">play</span>
+      </button>
+    </div>
   </header>
 
   <div class="page">
@@ -248,5 +283,22 @@
 
   </div>
 
+  <script>
+    const audio = document.getElementById('audio');
+    const playIcon = document.getElementById('playIcon');
+    const playLabel = document.getElementById('playLabel');
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        playLabel.textContent = 'pause';
+      } else {
+        audio.pause();
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        playLabel.textContent = 'play';
+      }
+    }
+  </script>
 </body>
 </html>
