@@ -245,7 +245,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/overview', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'overview.pdf'));
+  res.sendFile(path.join(__dirname, 'public', 'overview.html'));
 });
 
 app.get('/dashboard', (req, res) => {

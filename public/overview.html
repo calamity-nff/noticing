@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticing — Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: #1a1a1a;
+      background: #f7f5f2;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ——— Site header ——— */
+    .site-header {
+      padding: 28px 40px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .site-header a.wordmark {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    .site-header a.wordmark:hover { color: #555; }
+
+    .site-nav {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: #999;
+    }
+
+    /* ——— Page container ——— */
+    .page {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 56px 40px 80px 40px;
+    }
+
+    /* ——— Document masthead ——— */
+    .masthead {
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .masthead .wordmark {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .masthead .meta {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.8rem;
+      color: #888;
+      letter-spacing: 0.03em;
+    }
+
+    .masthead .meta .sep {
+      margin: 0 0.5em;
+      color: #ccc;
+    }
+
+    .masthead .meta a {
+      color: #888;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .masthead .meta a:hover { color: #555; }
+
+    /* ——— Sections ——— */
+    h2 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin: 44px 0 16px 0;
+    }
+
+    h2 .num {
+      color: #aaa;
+      margin-right: 1em;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    em, i { font-style: italic; }
+
+    a {
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid #bbb;
+    }
+
+    a:hover { border-bottom-color: #555; }
+
+    /* ——— Three modes list ——— */
+    ul.modes {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 20px 0;
+    }
+
+    ul.modes li {
+      font-style: italic;
+      color: #2a2a2a;
+      margin-bottom: 14px;
+      padding-left: 0;
+    }
+
+    ul.modes li:last-child { margin-bottom: 0; }
+
+    /* ——— Blockquote ——— */
+    blockquote {
+      margin: 20px 0 20px 36px;
+      padding: 0;
+      font-style: italic;
+      color: #2a2a2a;
+      border: none;
+    }
+
+    /* ——— Building image — desktop: float right ——— */
+    figure.building {
+      float: right;
+      margin: 4px 0 20px 28px;
+      width: 220px;
+      clear: right;
+    }
+
+    figure.building img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figure.building figcaption {
+      margin-top: 7px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.72rem;
+      color: #999;
+      letter-spacing: 0.04em;
+      font-style: normal;
+    }
+
+    /* ——— Mobile ——— */
+    @media (max-width: 600px) {
+      .site-header { padding: 20px 24px; }
+      .page { padding: 36px 24px 60px 24px; }
+
+      figure.building {
+        float: none;
+        width: 100%;
+        margin: 0 0 24px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="wordmark" href="/">Noticing</a>
+    <span class="site-nav">Overview</span>
+  </header>
+
+  <div class="page">
+
+    <div class="masthead">
+      <div class="wordmark">Noticing</div>
+      <div class="meta">
+        577 Shotwell Street, San Francisco
+        <span class="sep">&middot;</span>
+        <a href="mailto:calvin@noticing.org">calvin@noticing.org</a>
+      </div>
+    </div>
+
+    <h2><span class="num">I</span>What is Noticing?</h2>
+
+    <figure class="building">
+      <img src="/images/shotwell.jpg" alt="577 Shotwell Street">
+      <figcaption>577 Shotwell Street</figcaption>
+    </figure>
+
+    <p>Noticing is a new nonprofit cultural center in San Francisco that brings together art, philosophy, and practice to explore alternative paths of cultural production. We work at 577 Shotwell Street in the Mission District, a 5,400 square foot two-story building renovated to hold programs of exhibition, study, and movement.</p>
+
+    <p>Inspired by a long lineage of arts and peer education communities, Noticing works across three modes, each with its own rhythm:</p>
+
+    <ul class="modes">
+      <li><em>Experience</em> is the work of perception through art, holding exhibitions, performances, and encounters that resist quick description.</li>
+      <li><em>Inquiry</em> is the work of perception through ideas, holding seminars, readings, and the building of the Noticing Library.</li>
+      <li><em>Practice</em> is the work of perception through the body, holding contemplation, movement, and training of the senses.</li>
+    </ul>
+
+    <p>In this approach we seek to resist the pull toward too-soon answers. The unruly present moment has to be inhabited fully, before being named, for anything genuinely new to come from it. These three modes hold the present open long enough for the unfamiliar to register as such. Noticing orients around that sense of opening.</p>
+
+    <h2><span class="num">II</span>The Noticing Library</h2>
+
+    <p>At the center of the space, the Noticing Library is a public collection of texts, artworks, objects, and recordings that grows as programming accrues over the years. The library organizes its holdings by Aby Warburg&rsquo;s principle of the good neighbor, in which items sit together by association rather than by category. Fellows, guests, and staff all contribute to the library over time, and thus the collection reflects the life of the organization and its community.</p>
+
+    <p>A growing list of initial texts in the library can be found <a href="https://www.are.na/toby-shorin/noticing-library">here</a>. Artists in the collection include Gala Porras-Kim, Enrique Martinez Celaya, Klara Hosnedlova, Marguerite Humeau, and Austin Martin White.</p>
+
+    <h2><span class="num">III</span>The Noticing Fellowship</h2>
+
+    <p>Noticing&rsquo;s first program begins in Fall 2026 with the Noticing Fellowship, which gathers a cohort of artists, researchers, and practitioners around a single theme for six months. The inaugural theme is <em>Prophecy</em>.</p>
+
+    <p>The Fellowship&rsquo;s curriculum weaves seminars, shared meals, movement workshops, public events, field trips, and peer-to-peer support sessions. Guest scholars join across the arc of the program, providing fellows with a supportive context for their work. At the end of six months, fellows contribute an original work to the Noticing Library, and become permanent members of the community, invited into future iterations as peers, mentors, and practitioners.</p>
+
+    <p>Fellows receive a monthly stipend. The application process and full syllabus will be announced this summer.</p>
+
+    <h2><span class="num">IV</span>Prophecy</h2>
+
+    <p>It is difficult to make sense of the present moment. What is real, what does it mean, and what truly matters? Artists, researchers, and practitioners everywhere struggle to produce the answers to these questions.</p>
+
+    <p>Two dominant frames foreclose the inquiry. The first frame yokes reality to the clock, rushing all that can be known about the future into the present through <a href="https://a16z.com/prediction-the-successor-to-postmodernism/">prediction</a>, which seeks to maintain the linear succession of time through forecasting. In this world every moment and possibility is &ldquo;priced in,&rdquo; claimed and capitalized. This is a culture after control.</p>
+
+    <p>The second frame seeks to abolish the present entirely, via destruction or revolution, to move quickly out of the now and into an imagined utopian past, or else an imagined utopian future. This approach rejects the notion that a patient stance towards unfolding reality might reveal radiant paths to beauty, truth, and goodness. This is a culture after violence.</p>
+
+    <p>Prophecy is a third approach. In <em>Prophetic Culture</em>, philosopher Federico Campagna writes:</p>
+
+    <blockquote>&ldquo;Prophecy is a divine breaking within history. By creating a difference between reality and the world, it allows life to emerge as always-already saved, always-already partly elsewhere&hellip; Prophetic culture offers another room in the house.&rdquo;</blockquote>
+
+    <p>The Noticing Fellowship asks a community of artists, researchers, and practitioners to create and explore other rooms in the house. To open their senses fully, to discover what wants to be spoken through them, and to startle and awaken the world. We think of paintings, sculptures, poetry, literature, practices, and other work that speak to us from beyond time. We seek an aesthetic experience of the present that aspires to that same presence.</p>
+
+    <h2><span class="num">V</span>Organization</h2>
+
+    <p>Noticing is a 501(c)(3) nonprofit founded by Calvin Liu, alongside founding team members Kei Kreutler and Toby Shorin, and advised by board of directors members Natrina Gandana and Francesca de Sola. We are proud to make our home in San Francisco, a city that has often been an enclave of the underground, the counterculture, the strange, and the beautiful. We attempt to make a genuine contribution to that history.</p>
+
+    <p>We are working toward the first Fellowship and our public opening. In preparation we are seeking a <a href="https://docs.google.com/document/d/1xrNSiomjjNmOzJjF_p8MqGbHgVWN8xfQQJolSoOz_FM/edit?usp=sharing">part-time operations manager</a>. Please contact <a href="mailto:calvin@noticing.org">calvin@noticing.org</a> with any questions or to apply.</p>
+
+  </div>
+
+</body>
+</html>
