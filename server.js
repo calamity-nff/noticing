@@ -248,7 +248,7 @@ app.get('/overview', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'overview.html'));
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/ops', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
