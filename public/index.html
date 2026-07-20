@@ -128,6 +128,7 @@
       padding: 0;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.85rem;
+      font-weight: 700;
       letter-spacing: 0.1em;
       color: #555;
       white-space: nowrap;
@@ -158,7 +159,7 @@
     <audio id="audio" loop src="/mama.mp3"></audio>
     <button class="play-btn" id="playBtn" onclick="togglePlay()">
       <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <span id="playLabel">Play</span>
+      <span id="playLabel">play</span>
     </button>
   </div>
 
@@ -168,10 +169,10 @@
       <div class="hero-caption">The Holy War of Patience, Enrique Martinez Celaya</div>
     </div>
     <p>Noticing is a new nonprofit cultural center in the Mission District of San Francisco that brings together art, philosophy, and community service as a path toward individual and collective transformation.</p>
-    <a href="/blessings" style="display:inline-block; margin-top:28px; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:0.85rem; letter-spacing:0.1em; color:#e8e4df; text-decoration:none;">Blessings &rarr;</a>
+    <a href="/blessings" style="display:inline-block; margin-top:28px; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:0.85rem; letter-spacing:0.1em; color:#e8e4df; text-decoration:none;">blessings &rarr;</a>
     <div class="signup" id="signupForm">
-      <input type="email" id="emailInput" placeholder="Leave your email to stay updated" />
-      <button onclick="subscribe()">Subscribe</button>
+      <input type="email" id="emailInput" placeholder="leave your email to stay updated" />
+      <button onclick="subscribe()">subscribe</button>
     </div>
     <div class="signup-success" id="signupSuccess">Thank you for your interest. We'll keep you updated.</div>
   </div>
@@ -185,11 +186,11 @@
       if (audio.paused) {
         audio.play();
         playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        playLabel.textContent = 'Pause';
+        playLabel.textContent = 'pause';
       } else {
         audio.pause();
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        playLabel.textContent = 'Play';
+        playLabel.textContent = 'play';
       }
     }
 
