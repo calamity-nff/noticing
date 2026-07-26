@@ -22,14 +22,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#f6f1e7;
-    --paper-warm:#efe7d6;
-    --ink:#2b2620;
-    --ink-soft:#5c5448;
-    --bless:#a8442a;        /* warm terracotta-red, the "blessing" accent */
-    --bless-deep:#7d2f1d;
-    --gold:#c8902f;
-    --line:#d8cdb8;
+    --paper:#15110d;
+    --paper-warm:#1c1712;
+    --ink:#e2dbd0;
+    --ink-soft:#9a8a7a;
+    --bless:#c8902f;
+    --bless-deep:#9a6a1a;
+    --gold:#e0a84a;
+    --line:#2e2420;
     --maxw:1080px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -54,10 +54,10 @@
   }
   header.top.scrolled{
     padding:14px 0 0;
-    background:rgba(246,241,231,.9);
+    background:rgba(21,17,13,.94);
     backdrop-filter:saturate(120%) blur(8px);
     -webkit-backdrop-filter:saturate(120%) blur(8px);
-    box-shadow:0 6px 24px -18px rgba(60,40,20,.6);
+    box-shadow:0 6px 24px -18px rgba(0,0,0,.8);
   }
   .top-inner{
     display:flex;justify-content:space-between;align-items:baseline;
@@ -87,7 +87,7 @@
   }
   .hero-photo{
     position:relative;overflow:hidden;border:1px solid var(--line);
-    box-shadow:0 22px 60px -34px rgba(60,40,20,.5);
+    box-shadow:0 22px 60px -34px rgba(0,0,0,.8);
     aspect-ratio:3/2;
   }
   .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
@@ -95,7 +95,7 @@
     position:absolute;left:0;right:0;bottom:0;
     font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     color:#fff;padding:34px 16px 12px;text-align:left;
-    background:linear-gradient(transparent,rgba(20,15,10,.72));
+    background:linear-gradient(transparent,rgba(0,0,0,.72));
   }
   .eyebrow{
     font-family:"Inter",sans-serif;font-size:12px;font-weight:500;
@@ -120,39 +120,40 @@
 
   /* receipt-style fact strip */
   .receipt{
-    background:#fffdf8;
-    border:1px solid var(--line);
-    box-shadow:0 18px 50px -28px rgba(60,40,20,.35);
+    background:#f0ece4;
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:0 18px 50px -28px rgba(0,0,0,.7);
     padding:30px 34px 34px;text-align:left;position:relative;
+    color:#2b2620;
   }
   .receipt:before,.receipt:after{
     content:"";position:absolute;left:0;right:0;height:10px;
-    background:radial-gradient(circle at 6px -2px,transparent 6px,#fffdf8 6px) repeat-x;
+    background:radial-gradient(circle at 6px -2px,transparent 6px,#f0ece4 6px) repeat-x;
     background-size:14px 14px;
   }
   .receipt:before{top:-9px;transform:scaleY(-1)}
   .receipt:after{bottom:-9px}
   .receipt h4{
     font-family:"Inter",sans-serif;font-size:11px;font-weight:500;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+    letter-spacing:.2em;text-transform:uppercase;color:#5c5448;
     text-align:center;padding-bottom:14px;margin-bottom:6px;
-    border-bottom:1px dashed var(--line);
+    border-bottom:1px dashed #d8cdb8;
   }
   .receipt .row{
     display:flex;justify-content:space-between;align-items:baseline;
     font-family:"Inter",sans-serif;font-size:14px;padding:9px 0;
-    border-bottom:1px dotted var(--line);color:var(--ink-soft);
+    border-bottom:1px dotted #d8cdb8;color:#5c5448;
   }
-  .receipt .row .v{font-weight:500;color:var(--ink)}
+  .receipt .row .v{font-weight:500;color:#2b2620}
   .receipt .total{
     display:flex;justify-content:space-between;align-items:baseline;
     margin-top:16px;font-family:"Fraunces",serif;
   }
-  .receipt .total .l{font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);font-family:"Inter",sans-serif;font-weight:500}
+  .receipt .total .l{font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#5c5448;font-family:"Inter",sans-serif;font-weight:500}
   .receipt .total .v{font-size:2.1rem;color:var(--bless);font-style:italic}
   .receipt .stamp{
     text-align:center;margin-top:18px;font-family:"Inter",sans-serif;
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c8902f;
   }
 
   /* ---------- the idea ---------- */
@@ -194,27 +195,27 @@
   .tenet p{font-size:1.04rem;color:var(--ink-soft);line-height:1.55}
 
   /* ---------- impact ---------- */
-  .impact{padding:90px 0;background:var(--ink);color:var(--paper);border-top:1px solid var(--line)}
+  .impact{padding:90px 0;background:#0e0b08;color:var(--ink);border-top:1px solid var(--line)}
   .impact .wrap{max-width:920px}
   .impact .ih{
     font-family:"Inter",sans-serif;font-size:12px;font-weight:500;letter-spacing:.28em;
     text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px;
   }
   .impact h2{font-family:"Fraunces",serif;font-weight:300;font-size:2.4rem;text-align:center;line-height:1.1;margin-bottom:50px}
-  .impact h2 em{font-style:italic;color:#e8a04a}
+  .impact h2 em{font-style:italic;color:var(--gold)}
   .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:64px}
   .stat{text-align:center}
-  .stat .num{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;color:#fff;letter-spacing:-.01em}
-  .stat .lab{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(246,241,231,.6);margin-top:12px;line-height:1.4}
+  .stat .num{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;color:var(--ink);letter-spacing:-.01em}
+  .stat .lab{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(226,219,208,.55);margin-top:12px;line-height:1.4}
   .basket{max-width:680px;margin:0 auto}
-  .basket .bt{font-family:"Fraunces",serif;font-style:italic;font-size:1.3rem;text-align:center;margin-bottom:8px;color:#fff}
-  .basket .bsub{font-family:"Inter",sans-serif;font-size:13px;text-align:center;color:rgba(246,241,231,.55);margin-bottom:34px}
+  .basket .bt{font-family:"Fraunces",serif;font-style:italic;font-size:1.3rem;text-align:center;margin-bottom:8px;color:var(--ink)}
+  .basket .bsub{font-family:"Inter",sans-serif;font-size:13px;text-align:center;color:rgba(226,219,208,.5);margin-bottom:34px}
   .bar{display:grid;grid-template-columns:130px 1fr 46px;align-items:center;gap:14px;margin-bottom:14px}
-  .bar .blabel{font-family:"Inter",sans-serif;font-size:13px;color:rgba(246,241,231,.85);text-align:right}
-  .bar .btrack{display:block;height:12px;background:rgba(246,241,231,.12);border-radius:6px;overflow:hidden}
-  .bar .bfill{display:block;height:12px;background:linear-gradient(90deg,#c2502f,#f0a94e);border-radius:6px;transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.7,.3,1) both;transform:scaleX(0)}
-  .bar .bpct{font-family:"Inter",sans-serif;font-size:13px;color:rgba(246,241,231,.7)}
-  .impact .foot{text-align:center;font-family:"Inter",sans-serif;font-size:12px;color:rgba(246,241,231,.45);margin-top:46px;line-height:1.6}
+  .bar .blabel{font-family:"Inter",sans-serif;font-size:13px;color:rgba(226,219,208,.78);text-align:right}
+  .bar .btrack{display:block;height:12px;background:rgba(226,219,208,.1);border-radius:6px;overflow:hidden}
+  .bar .bfill{display:block;height:12px;background:linear-gradient(90deg,#c8902f,#e8c060);border-radius:6px;transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.7,.3,1) both;transform:scaleX(0)}
+  .bar .bpct{font-family:"Inter",sans-serif;font-size:13px;color:rgba(226,219,208,.6)}
+  .impact .foot{text-align:center;font-family:"Inter",sans-serif;font-size:12px;color:rgba(226,219,208,.38);margin-top:46px;line-height:1.6}
   @keyframes grow{to{transform:scaleX(1)}}
 
   /* ---------- how it works ---------- */
@@ -234,11 +235,6 @@
 
   /* ---------- stores ---------- */
   .stores{padding:96px 0}
-  .stores-photo{
-    max-width:760px;margin:0 auto 56px;overflow:hidden;
-    border:1px solid var(--line);box-shadow:0 18px 50px -30px rgba(60,40,20,.4);
-  }
-  .stores-photo img{width:100%;display:block;aspect-ratio:16/7;object-fit:cover;object-position:center 38%}
   .stores .lead{max-width:640px;margin:0 auto 56px;text-align:center}
   .stores .lead h2{font-family:"Fraunces",serif;font-weight:300;font-size:2.5rem;line-height:1.1;margin-bottom:18px}
   .stores .lead h2 em{font-style:italic;color:var(--bless)}
@@ -249,21 +245,21 @@
     padding:22px 4px;border-bottom:1px solid var(--line);
     transition:padding-left .25s,background .25s;
   }
-  .store:hover{padding-left:16px;background:linear-gradient(90deg,rgba(168,68,42,.05),transparent)}
+  .store:hover{padding-left:16px;background:linear-gradient(90deg,rgba(200,144,47,.08),transparent)}
   .store .name{font-family:"Fraunces",serif;font-size:1.5rem;font-weight:400}
   .store .hood{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
   .store.up .name{color:var(--ink-soft);font-style:italic;font-weight:300}
   .store.up .hood{color:var(--bless)}
   .fronts{max-width:760px;margin:0 auto 46px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   .fronts figure{margin:0;overflow:hidden;background:var(--paper-warm);
-    border:1px solid var(--line);box-shadow:0 14px 40px -30px rgba(60,40,20,.45)}
+    border:1px solid var(--line);box-shadow:0 14px 40px -30px rgba(0,0,0,.6)}
   .fronts img{width:100%;display:block;aspect-ratio:3/2;object-fit:cover;transition:transform .7s ease}
   .fronts figure:hover img{transform:scale(1.045)}
   .fronts figcaption{font-family:"Inter",sans-serif;font-size:10px;letter-spacing:.13em;
     text-transform:uppercase;color:var(--ink-soft);padding:9px 8px;text-align:center}
 
   /* ---------- voices ---------- */
-  .voices{padding:96px 0;background:var(--ink);color:var(--paper)}
+  .voices{padding:96px 0;background:#0e0b08;color:var(--ink)}
   .voices .wrap{max-width:820px}
   .voices .vh{
     font-family:"Inter",sans-serif;font-size:12px;font-weight:500;letter-spacing:.28em;
@@ -273,19 +269,19 @@
   .quote:last-child{margin-bottom:0}
   .quote q{
     font-family:"Fraunces",serif;font-weight:300;font-size:clamp(1.6rem,4vw,2.3rem);
-    line-height:1.32;font-style:italic;quotes:"“" "”";display:block;
+    line-height:1.32;font-style:italic;quotes:"\201C" "\201D";display:block;
   }
   .quote .who{
     font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    color:rgba(246,241,231,.55);margin-top:20px;
+    color:rgba(226,219,208,.5);margin-top:20px;
   }
   .voices .vsrc{
     margin-top:56px;text-align:center;font-family:"Inter",sans-serif;font-size:13px;
-    line-height:1.7;color:var(--ink-soft);font-style:italic;
+    line-height:1.7;color:rgba(226,219,208,.42);font-style:italic;
   }
-  .voices .vsrc a{color:var(--bless);text-decoration:none;border-bottom:1px solid rgba(168,68,42,.35)}
+  .voices .vsrc a{color:var(--bless);text-decoration:none;border-bottom:1px solid rgba(200,144,47,.35)}
   .voices .vsrc a:hover{border-bottom-color:var(--bless)}
-  .voices .divider{width:40px;height:1px;background:rgba(200,144,47,.5);margin:0 auto}
+  .voices .divider{width:40px;height:1px;background:rgba(224,168,74,.4);margin:0 auto}
 
   /* ---------- cta ---------- */
   .cta{padding:110px 0;text-align:center}
@@ -299,15 +295,15 @@
   }
   .btn-primary{background:var(--bless);color:#fff8ef}
   .btn-primary:hover{background:var(--bless-deep);transform:translateY(-2px)}
-  .btn-ghost{border:1px solid var(--ink);color:var(--ink)}
-  .btn-ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid rgba(226,219,208,.3);color:var(--ink)}
+  .btn-ghost:hover{background:rgba(226,219,208,.08);transform:translateY(-2px)}
   .contact a{color:var(--bless);text-decoration:none;border-bottom:1px solid var(--line)}
   .ways{
     display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
     max-width:900px;margin:8px auto 0;text-align:left;
   }
   .way{
-    border:1px solid var(--line);padding:28px 26px 30px;background:rgba(255,255,255,.4);
+    border:1px solid var(--line);padding:28px 26px 30px;background:rgba(226,219,208,.04);
     display:flex;flex-direction:column;
   }
   .way h3{
@@ -414,7 +410,7 @@
       <div class="bar"><span class="blabel">Dairy &amp; eggs</span><span class="btrack"><span class="bfill" style="width:35%;animation-delay:.5s"></span></span><span class="bpct">35%</span></div>
       <div class="bar"><span class="blabel">Snacks &amp; sweets</span><span class="btrack"><span class="bfill" style="width:32%;animation-delay:.6s"></span></span><span class="bpct">32%</span></div></div>
 
-    <p class="foot">Tallied from 248 itemized receipts — about 90% of every basket we’ve covered. The most common things crossing the counter: tomatoes, plantains, mango and papaya, rice and beans, fresh meat and chicken, eggs and crema, tortillas and pan dulce — the makings of everyday meals.</p>
+    <p class="foot">Tallied from 248 itemized receipts — about 90% of every basket we've covered. The most common things crossing the counter: tomatoes, plantains, mango and papaya, rice and beans, fresh meat and chicken, eggs and crema, tortillas and pan dulce — the makings of everyday meals.</p>
   </div>
 </section>
 
@@ -422,9 +418,9 @@
   <div class="wrap idea-grid">
     <h2>A small thing,<br>done <em>openly.</em></h2>
     <div>
-      <p>On a given evening we walk into an independent grocery store that already serves its neighborhood well, and for one hour we quietly cover whatever crosses the counter. The cashier tells each person their groceries are taken care of. Most assume it’s a joke. Some have no words.</p>
-      <p class="pull">“Thank you. I really needed this. I didn’t know if I—”</p>
-      <p>We don’t ask who qualifies, because everyone does. There’s no form, no sign-up, no story you have to tell. In a city where so much depends on luck and access, this is one moment that doesn’t.</p>
+      <p>On a given evening we walk into an independent grocery store that already serves its neighborhood well, and for one hour we quietly cover whatever crosses the counter. The cashier tells each person their groceries are taken care of. Most assume it's a joke. Some have no words.</p>
+      <p class="pull">"Thank you. I really needed this. I didn't know if I—"</p>
+      <p>We don't ask who qualifies, because everyone does. There's no form, no sign-up, no story you have to tell. In a city where so much depends on luck and access, this is one moment that doesn't.</p>
     </div>
   </div>
 </section>
@@ -439,12 +435,12 @@
       <div class="tenet">
         <span class="eb">Social trust repair</span>
         <h4>The city can still<br>surprise you <em>kindly.</em></h4>
-        <p>Urban life teaches a certain wariness. For one evening, the surprise at the register runs the other way — proof that a stranger’s intentions toward you can simply be good.</p>
+        <p>Urban life teaches a certain wariness. For one evening, the surprise at the register runs the other way — proof that a stranger's intentions toward you can simply be good.</p>
       </div>
       <div class="tenet">
         <span class="eb">Dignity without performance</span>
         <h4>No story you<br>have to <em>tell.</em></h4>
-        <p>No form, no proof of need, no gratitude expected in return. You don’t have to qualify or perform anything. You were here, and that was enough.</p>
+        <p>No form, no proof of need, no gratitude expected in return. You don't have to qualify or perform anything. You were here, and that was enough.</p>
       </div>
       <div class="tenet">
         <span class="eb">Normalizing generosity</span>
@@ -468,17 +464,17 @@
       <div class="step">
         <span class="n">i.</span>
         <h5>We choose a store</h5>
-        <p>An independent grocer already serving low-income neighbors in a real, everyday way. We’re not replacing them — we’re backing what they already do.</p>
+        <p>An independent grocer already serving low-income neighbors in a real, everyday way. We're not replacing them — we're backing what they already do.</p>
       </div>
       <div class="step">
         <span class="n">ii.</span>
         <h5>We cover the hour</h5>
-        <p>For a set window, every customer’s total is paid at the register. They shop the way they always do, and hear at the counter: your groceries are covered today through a local nonprofit.</p>
+        <p>For a set window, every customer's total is paid at the register. They shop the way they always do, and hear at the counter: your groceries are covered today through a local nonprofit.</p>
       </div>
       <div class="step">
         <span class="n">iii.</span>
         <h5>We hope it spreads</h5>
-        <p>We aren’t trying to be the heroes of this. The wish is simple: that other San Franciscans do the same for their own corners of the city.</p>
+        <p>We aren't trying to be the heroes of this. The wish is simple: that other San Franciscans do the same for their own corners of the city.</p>
       </div>
     </div>
   </div>
@@ -487,7 +483,7 @@
 <section class="stores">
   <div class="wrap">
     <div class="lead">
-      <h2>Where we’ve <em>shown up</em></h2>
+      <h2>Where we've <em>shown up</em></h2>
       <p>Each one a store that already feeds its neighborhood. We just settle the tab for a while.</p>
     </div>
     <div class="fronts">
@@ -513,17 +509,17 @@
   <div class="wrap">
     <div class="vh">Voices from the register</div>
     <div class="quote">
-      <q>We’re in difficult times. It’s meaningful to help the community like this.</q>
+      <q>We're in difficult times. It's meaningful to help the community like this.</q>
       <div class="who">Kevin Espinoza · customer, Casa Lucaz</div>
     </div>
     <div class="divider"></div>
     <div class="quote" style="margin-top:52px">
-      <q>Some had no words. They didn’t feel it was real.</q>
+      <q>Some had no words. They didn't feel it was real.</q>
       <div class="who">Zelene Limon · cashier, Casa Lucaz</div>
     </div>
     <div class="divider"></div>
     <div class="quote" style="margin-top:52px">
-      <q>It’s just a way to show people that someone cares about them.</q>
+      <q>It's just a way to show people that someone cares about them.</q>
       <div class="who">Elias Domingo · community engagement, Noticing Folk Foundation</div>
     </div>
     <p class="vsrc">These voices were first reported by Iryna Humenyuk in
@@ -535,16 +531,16 @@
 <section class="cta" id="give">
   <div class="wrap">
     <h2>Bless a register<br>in <em>your</em> neighborhood.</h2>
-    <p>There are a few ways to be part of this — whichever fits, we’d love to hear from you.</p>
+    <p>There are a few ways to be part of this — whichever fits, we'd love to hear from you.</p>
     <div class="ways">
       <div class="way">
         <h3>Sponsor a session</h3>
-        <p>Cover an hour at one store — about forty families’ groceries.</p>
+        <p>Cover an hour at one store — about forty families' groceries.</p>
         <a href="mailto:hello@noticing.org?subject=Sponsor%20a%20Grocery%20Blessings%20session">Fund an evening →</a>
       </div>
       <div class="way">
         <h3>Partner with us</h3>
-        <p>Run an organization or business that serves the San Francisco community? We’re always looking for new blessings to share.</p>
+        <p>Run an organization or business that serves the San Francisco community? We're always looking for new blessings to share.</p>
         <a href="mailto:hello@noticing.org?subject=Grocery%20Blessings%20partnership">Start a conversation →</a>
       </div>
       <div class="way">
