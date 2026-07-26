@@ -20,10 +20,21 @@ const redisClient = Redis.createClient({
 
 redisClient.connect().catch(console.error);
 
-// Redirect bare domain to www
+// Redirect bare domains to www
 app.use((req, res, next) => {
   if (req.hostname === 'noticing.org') {
     return res.redirect(301, 'https://www.noticing.org' + req.originalUrl);
+  }
+  if (req.hostname === 'noticingblessings.org') {
+    return res.redirect(301, 'https://www.noticingblessings.org' + req.originalUrl);
+  }
+  next();
+});
+
+// Serve blessings page for noticingblessings.org
+app.use((req, res, next) => {
+  if (req.hostname === 'www.noticingblessings.org') {
+    return res.sendFile(path.join(__dirname, 'public', 'blessings.html'));
   }
   next();
 });
@@ -257,7 +268,7 @@ app.get('/overview', (req, res) => {
 });
 
 app.get('/blessings', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'blessings.html'));
+  res.redirect(301, 'https://www.noticingblessings.org');
 });
 
 app.get('/ops', (req, res) => {
