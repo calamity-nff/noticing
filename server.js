@@ -268,7 +268,7 @@ app.get('/overview', (req, res) => {
 });
 
 app.get('/blessings', (req, res) => {
-  res.redirect(301, 'https://www.noticingblessings.org');
+  res.sendFile(path.join(__dirname, 'public', 'blessings.html'));
 });
 
 app.get('/ops', (req, res) => {
