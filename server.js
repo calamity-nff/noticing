@@ -31,9 +31,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve blessings page for noticingblessings.org
+// Serve blessings page for noticingblessings.org (assets fall through to static)
 app.use((req, res, next) => {
-  if (req.hostname === 'www.noticingblessings.org') {
+  if (req.hostname === 'www.noticingblessings.org' && req.path === '/') {
     return res.sendFile(path.join(__dirname, 'public', 'blessings.html'));
   }
   next();
